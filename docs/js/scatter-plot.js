@@ -1,28 +1,94 @@
-const scatterPlot = c3.generate({
+const M = 30;
+const D = 2;
+
+const Xmax = 5;
+const Xmin = -5;
+
+let X = new Array(M);
+let x1;
+let x2;
+let t = 0;
+
+loop();
+
+function loop() {
+  t++;
+  x1 = new Array();
+  x2 = new Array();
+  initArray();
+  initParticle();
+  x1.push("x1");
+  x2.push("x2");
+  for ( let i = 0; i < M; i++ ) {
+    x1.push(X[i][0]);
+    x2.push(X[i][1]);
+  }
+  plot();
+  let timer = setTimeout(loop, 500);
+  if ( t == 10 ) {
+    clearTimeout(timer);
+  }
+}
+
+function initParticle() {
+  for ( let i = 0; i < M; i++ ) {
+    for ( let d = 0; d < D; d++ ) {
+      X[i][d] = makeRand();
+    }
+  }
+}
+
+function initArray() {
+  for ( let i = 0; i < M; i++ ) {
+    X[i] = new Array(D);
+  }
+}
+
+function makeRand() {
+  return Math.random() * (Xmax - Xmin) + Xmin;
+}
+
+function plot() {
+  c3.generate({
     bindto: '#scatter-plot',
     data: {
-        xs: {
-            setosa: 'setosa_x',
-            versicolor: 'versicolor_x',
-        },
-        // iris data from R
-        columns: [
-            ["setosa_x", 3.5, 3.0, 3.2, 3.1, 3.6, 3.9, 3.4, 3.4, 2.9, 3.1, 3.7, 3.4, 3.0, 3.0, 4.0, 4.4, 3.9, 3.5, 3.8, 3.8, 3.4, 3.7, 3.6, 3.3, 3.4, 3.0, 3.4, 3.5, 3.4, 3.2, 3.1, 3.4, 4.1, 4.2, 3.1, 3.2, 3.5, 3.6, 3.0, 3.4, 3.5, 2.3, 3.2, 3.5, 3.8, 3.0, 3.8, 3.2, 3.7, 3.3],
-            ["versicolor_x", 3.2, 3.2, 3.1, 2.3, 2.8, 2.8, 3.3, 2.4, 2.9, 2.7, 2.0, 3.0, 2.2, 2.9, 2.9, 3.1, 3.0, 2.7, 2.2, 2.5, 3.2, 2.8, 2.5, 2.8, 2.9, 3.0, 2.8, 3.0, 2.9, 2.6, 2.4, 2.4, 2.7, 2.7, 3.0, 3.4, 3.1, 2.3, 3.0, 2.5, 2.6, 3.0, 2.6, 2.3, 2.7, 3.0, 2.9, 2.9, 2.5, 2.8],
-            ["setosa", 0.2, 0.2, 0.2, 0.2, 0.2, 0.4, 0.3, 0.2, 0.2, 0.1, 0.2, 0.2, 0.1, 0.1, 0.2, 0.4, 0.4, 0.3, 0.3, 0.3, 0.2, 0.4, 0.2, 0.5, 0.2, 0.2, 0.4, 0.2, 0.2, 0.2, 0.2, 0.4, 0.1, 0.2, 0.2, 0.2, 0.2, 0.1, 0.2, 0.2, 0.3, 0.3, 0.2, 0.6, 0.4, 0.3, 0.2, 0.2, 0.2, 0.2],
-            ["versicolor", 1.4, 1.5, 1.5, 1.3, 1.5, 1.3, 1.6, 1.0, 1.3, 1.4, 1.0, 1.5, 1.0, 1.4, 1.3, 1.4, 1.5, 1.0, 1.5, 1.1, 1.8, 1.3, 1.5, 1.2, 1.3, 1.4, 1.4, 1.7, 1.5, 1.0, 1.1, 1.0, 1.2, 1.6, 1.5, 1.6, 1.5, 1.3, 1.3, 1.3, 1.2, 1.4, 1.2, 1.0, 1.3, 1.2, 1.3, 1.3, 1.1, 1.3],
-        ],
-        type: 'scatter'
+      xs: {
+        x2: 'x1',
+      },
+      // iris data from R
+      columns: [
+        x1,
+        x2,
+      ],
+      type: 'scatter'
     },
     axis: {
-        x: {
-            label: 'Sepal.Width',
-            tick: {
-                fit: false
-            }
+      x: {
+        label: {
+          text: 'x1',
+          position: 'outer-center'
         },
-        y: {
-            label: 'Petal.Width'
-        }
+        tick: {
+          fit: false,
+          format: d3.format('.1f')
+        },
+        max: 5,
+        min: -5
+      },
+      y: {
+        label: {
+          text: 'x2',
+          position: 'outer-middle'
+        },
+        tick: {
+          format: d3.format('.1f')
+        },
+        max: 5,
+        min: -5
+      }
+    },
+    legend: {
+      show: false
     }
-});
+  });
+}
