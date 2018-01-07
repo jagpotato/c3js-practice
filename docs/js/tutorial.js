@@ -1,5 +1,5 @@
-const chart1 = c3.generate({
-    bindto: '#chart1',
+const tutorial1 = c3.generate({
+    bindto: '#tutorial1',
     data: {
       columns: [
         ['data1', 30, 200, 100, 400, 150, 250],
@@ -8,8 +8,8 @@ const chart1 = c3.generate({
     }
 });
 
-const chart2 = c3.generate({
-    bindto: '#chart2',
+const tutorial2 = c3.generate({
+    bindto: '#tutorial2',
     data: {
       columns: [
         ['data1', 30, 200, 100, 400, 150, 250],
@@ -26,8 +26,8 @@ const chart2 = c3.generate({
     }
 });
 
-const chart3 = c3.generate({
-    bindto: '#chart3',
+const tutorial3 = c3.generate({
+    bindto: '#tutorial3',
     data: {
       columns: [
         ['data1', 30, 200, 100, 400, 150, 250],
@@ -54,8 +54,8 @@ const chart3 = c3.generate({
     }
 });
 
-const chart4 = c3.generate({
-    bindto: '#chart4',
+const tutorial4 = c3.generate({
+    bindto: '#tutorial4',
     data: {
       columns: [
         ['data1', 30, 200, 100, 400, 150, 250],
@@ -85,8 +85,8 @@ const chart4 = c3.generate({
     }
 });
 
-const chart5 = c3.generate({
-    bindto: '#chart5',
+const tutorial5 = c3.generate({
+    bindto: '#tutorial5',
     data: {
       columns: [
         ['data1', 30, 200, 100, 400, 150, 250],
